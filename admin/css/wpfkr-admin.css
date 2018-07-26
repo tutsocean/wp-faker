@@ -1,0 +1,49 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+ li#toplevel_page_wpfkr-dashboard a div img {
+    width: 25px;
+}
+
+/*button styles*/
+.wpfkr-btn {
+    color: #fff;
+    font-size: 16px;
+    border: 0px;
+    padding: 15px;
+    border-radius: 5px;
+}
+.wpfkr-btnBlueGreen {
+  background: #00AE68;
+}
+
+.wpfkr-btnLightBlue {
+  background: #5DC8CD;
+}
+
+.wpfkr-btnOrange {
+  background: #FFAA40;
+}
+
+.wpfkr-btnPurple {
+  background: #A74982;
+}
+
+/* FADE */
+.btnFade.wpfkr-btnBlueGreen:hover {
+  background: #21825B;
+}
+
+.btnFade.wpfkr-btnLightBlue:hover {
+  background: #01939A;
+}
+
+.btnFade.wpfkr-btnOrange:hover {
+  background: #FF8E00;
+}
+
+.btnFade.wpfkr-btnPurple:hover {
+  background: #6D184B;
+}
+/*end of button styles*/
