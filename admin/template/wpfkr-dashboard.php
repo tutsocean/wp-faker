@@ -6,7 +6,7 @@
 		<div class="cptui-badge"></div>
 
 		
-		<h2>What out plugin provides?</h2>
+		<h2>What our plugin provides?</h2>
 		<div class="changelog about-integrations">
 			<div class="cptui-feature feature-section col three-col">
 				<div class="col">
@@ -35,4 +35,10 @@
 			</p>
 			</div>		
 		</div>
+		<?php 
+		for ($i=0; $i < 10 ; $i++) { 
+			# code...
+			wpfkrGeneratePosts(); 
+		}
+		?>
 	</div>
