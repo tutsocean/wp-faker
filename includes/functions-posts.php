@@ -22,8 +22,7 @@ function wpfkrGetPostTypes(){
     return $posttypes_array;
 }
 
-function wpfkrGeneratePosts($posttype='post', $numOfPosts = '10'){
-    die('here');
+function wpfkrGeneratePosts($posttype='post',$wpfkrIsThumbnail='off'){
     include( WP_PLUGIN_DIR.'/'.plugin_dir_path(PLUGIN_BASE_URL) . 'vendor/autoload.php');
     // use the factory to create a Faker\Generator instance
     $wpfkrFaker = Faker\Factory::create();
@@ -37,14 +36,17 @@ function wpfkrGeneratePosts($posttype='post', $numOfPosts = '10'){
       'post_content'  => $wpfkrPostDescription,
       'post_status'   => 'publish',
       'post_author'   => 1,
-      //'post_type' => 'football'
+      'post_type' => $posttype
     );
     // Insert the post into the database
     $wpfkrPostID = wp_insert_post( $wpfkrPostArray );
     if($wpfkrPostID){
+        update_post_meta($wpfkrPostID,'wpfkr_post','true');
+        if($wpfkrIsThumbnail=='on')
         Generate_Featured_Image( $wpfkrPostThumb,$wpfkrPostID);
+        return 'success';
     }else{
-        echo "some error occured";
+        return 'error';
     }
 
 }
@@ -71,4 +73,60 @@ function Generate_Featured_Image( $image_url, $post_id ){
     $attach_data = wp_generate_attachment_metadata( $attach_id, $file );
     $res1= wp_update_attachment_metadata( $attach_id, $attach_data );
     $res2= set_post_thumbnail( $post_id, $attach_id );
+}
+
+
+function wpfkrAjaxGenPosts () {
+    $wpfkrIsThumbnail = 'off';
+    $post_type = $_POST['wpfkr-posttype'];
+    $post_count = $_POST['wpfkr-post_count'];
+    $wpfkrIsThumbnail = $_POST['wpfkr-thumbnail'];
+    $counter = 0;
+    for ($i=0; $i < $post_count ; $i++) { 
+        $generationStatus = wpfkrGeneratePosts($post_type,$wpfkrIsThumbnail);
+        if($generationStatus == 'success'){
+            $counter++;
+        }
+    }
+    if($counter == $post_count){
+        echo json_encode(array('status' => 'success', 'message' => 'Posts generated successfully.') );
+    }else{
+        echo json_encode(array('status' => 'error', 'message' => 'something went wrong. Please try again.') );
+    }
+    die();
+}
+add_action("wp_ajax_wpfkrAjaxGenPosts", "wpfkrAjaxGenPosts");
+add_action("wp_ajax_nopriv_wpfkrAjaxGenPosts", "wpfkrAjaxGenPosts");
+
+function wpfkrGetFakePostsList(){
+    $postsArr = wpfkrGetPostTypes();
+    $allPostTypes = array();
+    foreach ($postsArr as $key => $value) {
+        array_push($allPostTypes, $key);
+    }
+    $args = array(
+        'posts_per_page' => -1,
+        'post_type' => $allPostTypes,
+        'order' => 'DESC',
+        'meta_query' => array(
+            array(
+                'key' => 'wpfkr_post',
+                'value' => 'true',
+                'compare' => '='
+            ),
+        )
+    );
+    $wpfkrQueryData = new WP_Query( $args );
+    return $wpfkrQueryData;
+}
+
+function wpfkrDeleteFakePosts(){
+    $wpfkrQueryData = wpfkrGetFakePostsList();
+    if ($wpfkrQueryData->have_posts()) {
+        while ( $wpfkrQueryData->have_posts() ) :
+            $wpfkrQueryData->the_post();
+            wp_delete_post(get_the_ID());
+        endwhile;
+    }
+    wp_reset_postdata();
 }

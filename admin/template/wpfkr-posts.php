@@ -1,48 +1,36 @@
 <div class="wpfkr-wrapper">
 	<div class="wpfkr-top-header">
-	    <h2>
-	    	<?php echo  PLUGIN_NAME ?> <span> - Generate Posts</span>
-	    </h2>
+	    <h2><?php echo  PLUGIN_NAME ?> <span> - Generate Posts</span></h2>
+	    <?php 
+	    if(isset($_GET['status'])){
+	    	if($_GET['status'] == 'success'){
+	    		echo '<div class="wpfkr-success-msg">All posts deleted successfully.</div>';
+	    	}else{
+	    		echo '<div class="wpfkr-error-msg">Something went wrong.</div>';
+	    	}
+	    }
+		if( isset( $_GET[ 'tab' ] ) ) {
+		    $active_tab = $_GET[ 'tab' ];
+		}else{
+			$active_tab = 'generate_posts';
+		}
+		?>
+	    <h2 class="nav-tab-wrapper">
+		    <a href="?page=Posts&tab=generate_posts" class="nav-tab <?php echo $active_tab == 'generate_posts' ? 'nav-tab-active' : ''; ?>">Generate Posts</a>
+		    <a href="?page=Posts&tab=view_posts" class="nav-tab <?php echo $active_tab == 'view_posts' ? 'nav-tab-active' : ''; ?>">View Fake Posts</a>
+		</h2>
 	</div>
 	<div class="wpfkr-pagebody">
 		<?php 
-		$wpfkrPosTypes = wpfkrGetPostTypes();
+		if($active_tab == 'generate_posts'){
+			$page_slug = 'wpfkr-generatePosts-form';
+		}else{
+			$page_slug = 'wpfkr-listPosts';
+		}
+		include(WP_PLUGIN_DIR.'/'.plugin_dir_path(PLUGIN_BASE_URL) . 'admin/partials/posts/'.$page_slug.'.php');
 		?>
-
-		<form method="post" action="options.php">
-		    <table class="form-table">
-		        <tr valign="top">
-			        <th scope="row">Choose Post type</th>
-			        <td>
-			        	<select name="wpfkr-posttype">
-			        		<?php foreach ($wpfkrPosTypes as $key => $value): ?>
-			        			<option value="<?php echo $key; ?>"><?php echo $value; ?></option>
-			        		<?php endforeach; ?>
-			        	</select>
-			        </td>
-		        </tr>
-		        <tr valign="top">
-			        <th scope="row">Number of posts</th>
-			        <td>
-			        	<input type="number" name="wpfkr-post_count" placeholder="Number of posts" />
-			        </td>
-		        </tr>
-
-		        <tr valign="top">
-			        <th scope="row">Generate Thumbnail</th>
-			        <td>
-			        	<input type="checkbox" name="wpfkr-thumbnail" />
-			        </td>
-		        </tr>
-
-		    </table>
-		    <input class="wpfkr-btn btnFade wpfkr-btnBlueGreen wpfkrGeneratePosts" type="submit" name="wpfkrGeneratePosts" value="Generate posts">
-		</form>
-
 	</div>
-
 	<div class="wpfkr-footer">
 		
 	</div>
 </div>
-

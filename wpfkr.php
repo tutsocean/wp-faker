@@ -71,7 +71,6 @@ add_action("wp_loaded","qwWpLoaded");
 function qwWpLoaded(){
   require_once plugin_dir_path( __FILE__ ) . 'includes/functions.php';
   require_once plugin_dir_path( __FILE__ ) . 'includes/functions-posts.php';
-  require_once plugin_dir_path( __FILE__ ) . 'includes/functions-products.php';
   require_once plugin_dir_path( __FILE__ ) . 'includes/functions-users.php';
 }
 
