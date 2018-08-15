@@ -35,11 +35,11 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'PLUGIN_NAME_VERSION', '1.0.0' );
-define( 'PLUGIN_BASE_URL',plugin_basename( __FILE__ )); 
-define( 'PLUGIN_BASE_URI',plugin_dir_path( __FILE__ )); 
-define("PLUGIN_DIR",plugin_basename( __DIR__ ));
-define("PLUGIN_NAME",'WP Faker');
+define( 'WPFKR_PLUGIN_NAME_VERSION', '1.0.0' );
+define( 'WPFKR_PLUGIN_BASE_URL',plugin_basename( __FILE__ )); 
+define( 'WPFKR_PLUGIN_BASE_URI',plugin_dir_path( __FILE__ )); 
+define("WPFKR_PLUGIN_DIR",plugin_basename( __DIR__ ));
+define("WPFKR_PLUGIN_NAME",'WP Faker');
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-wpfkr-activator.php

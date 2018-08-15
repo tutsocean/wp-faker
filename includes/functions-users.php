@@ -1,10 +1,10 @@
 <?php
 function wpfkrUsers(){
-    include( WP_PLUGIN_DIR.'/'.plugin_dir_path(PLUGIN_BASE_URL) . 'admin/template/wpfkr-users.php');
+    include( WP_PLUGIN_DIR.'/'.plugin_dir_path(WPFKR_PLUGIN_BASE_URL) . 'admin/template/wpfkr-users.php');
 }
 
 function wpfkrGenerateUsers($userRole='subscriber',$wpfkrIsBio='off'){
-	include( WP_PLUGIN_DIR.'/'.plugin_dir_path(PLUGIN_BASE_URL) . 'vendor/autoload.php');
+	include( WP_PLUGIN_DIR.'/'.plugin_dir_path(WPFKR_PLUGIN_BASE_URL) . 'vendor/autoload.php');
     // use the factory to create a Faker\Generator instance
     $wpfkrFaker = Faker\Factory::create();
     $wpfkrFirstName = $wpfkrFaker->firstName;

@@ -6,7 +6,7 @@ function wpfkrDashboard(){
     add_submenu_page ( 'wpfkr-dashboard', 'Posts', 'Posts', 'read', 'Posts', 'wpfkrPosts');
 }
 function wpfkrMainDashboard(){
-    include( WP_PLUGIN_DIR.'/'.plugin_dir_path(PLUGIN_BASE_URL) . 'admin/template/wpfkr-dashboard.php');
+    include( WP_PLUGIN_DIR.'/'.plugin_dir_path(WPFKR_PLUGIN_BASE_URL) . 'admin/template/wpfkr-dashboard.php');
 }
 function dcs_print($arr){
     echo "<pre>";

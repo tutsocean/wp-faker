@@ -1,6 +1,6 @@
 <?php
 function wpfkrPosts(){
-    include( WP_PLUGIN_DIR.'/'.plugin_dir_path(PLUGIN_BASE_URL) . 'admin/template/wpfkr-posts.php');
+    include( WP_PLUGIN_DIR.'/'.plugin_dir_path(WPFKR_PLUGIN_BASE_URL) . 'admin/template/wpfkr-posts.php');
 }
 function wpfkrGetPostTypes(){
     $args=array(
@@ -23,13 +23,13 @@ function wpfkrGetPostTypes(){
 }
 
 function wpfkrGeneratePosts($posttype='post',$wpfkrIsThumbnail='off'){
-    include( WP_PLUGIN_DIR.'/'.plugin_dir_path(PLUGIN_BASE_URL) . 'vendor/autoload.php');
+    include( WP_PLUGIN_DIR.'/'.plugin_dir_path(WPFKR_PLUGIN_BASE_URL) . 'vendor/autoload.php');
     // use the factory to create a Faker\Generator instance
     $wpfkrFaker = Faker\Factory::create();
     $wpfkrPostTitle = $wpfkrFaker->text($maxNbChars = 40);
     $wpfkrPostDescription = $wpfkrFaker->text($maxNbChars = 700);
     $rand_num = rand(1,10);
-    $wpfkrPostThumb = WP_PLUGIN_DIR.'/'.plugin_dir_path(PLUGIN_BASE_URL) . 'images/posts/'.$rand_num.".jpg";
+    $wpfkrPostThumb = WP_PLUGIN_DIR.'/'.plugin_dir_path(WPFKR_PLUGIN_BASE_URL) . 'images/posts/'.$rand_num.".jpg";
     // create post
     $wpfkrPostArray = array(
       'post_title'    => wp_strip_all_tags( $wpfkrPostTitle ),
