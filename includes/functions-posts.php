@@ -43,14 +43,14 @@ function wpfkrGeneratePosts($posttype='post',$wpfkrIsThumbnail='off'){
     if($wpfkrPostID){
         update_post_meta($wpfkrPostID,'wpfkr_post','true');
         if($wpfkrIsThumbnail=='on')
-        Generate_Featured_Image( $wpfkrPostThumb,$wpfkrPostID);
+        wpfkr_Generate_Featured_Image( $wpfkrPostThumb,$wpfkrPostID);
         return 'success';
     }else{
         return 'error';
     }
 
 }
-function Generate_Featured_Image( $image_url, $post_id ){
+function wpfkr_Generate_Featured_Image( $image_url, $post_id ){
     $upload_dir = wp_upload_dir();
     $image_data = file_get_contents($image_url);
     $filename = "wpfkr_".$post_id;

@@ -67,8 +67,8 @@ register_deactivation_hook( __FILE__, 'deactivate_wpfkr' );
  */
 require plugin_dir_path( __FILE__ ) . 'includes/class-wpfkr.php';
 
-add_action("wp_loaded","qwWpLoaded");
-function qwWpLoaded(){
+add_action("wp_loaded","wpfkrAllLoaded");
+function wpfkrAllLoaded(){
   require_once plugin_dir_path( __FILE__ ) . 'includes/functions.php';
   require_once plugin_dir_path( __FILE__ ) . 'includes/functions-posts.php';
   require_once plugin_dir_path( __FILE__ ) . 'includes/functions-users.php';
