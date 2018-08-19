@@ -5,6 +5,11 @@
  li#toplevel_page_wpfkr-dashboard a div img {
     width: 25px;
 }
+.remaining_notification {
+    padding: 15px 0px;
+    font-size: 15px;
+}
+
 .deleteSpan{
   float: right;
 }

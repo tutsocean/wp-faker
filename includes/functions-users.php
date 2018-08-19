@@ -35,20 +35,27 @@ function wpfkrGenerateUsers($userRole='subscriber',$wpfkrIsBio='off'){
 function wpfkrAjaxGenUsers () {
     $wpfkrIsBio = 'off';
     $userRole = $_POST['wpfkr-userRole'];
+    $remaining_users = $_POST['remaining_users'];
     $user_count = $_POST['wpfkr-user_count'];
     $wpfkrIsBio = $_POST['wpfkr-bio'];
+    if($remaining_users>=5){
+        $loopLimit = 5;
+    }else{
+        $loopLimit = $remaining_users;
+    }
     $counter = 0;
-    for ($i=0; $i < $user_count ; $i++) { 
+    for ($i=0; $i < $loopLimit ; $i++) { 
         $generationStatus = wpfkrGenerateUsers($userRole,$wpfkrIsBio);
         if($generationStatus == 'success'){
             $counter++;
         }
     }
-    if($counter == $user_count){
-        echo json_encode(array('status' => 'success', 'message' => 'Users generated successfully.') );
+    if($remaining_users>=5){
+        $remaining_users = $remaining_users - 5;
     }else{
-        echo json_encode(array('status' => 'error', 'message' => 'something went wrong. Please try again.') );
+        $remaining_users = 0;
     }
+    echo json_encode(array('status' => 'success', 'message' => 'Users generated successfully.','remaining_users' => $remaining_users) );
     die();
 }
 add_action("wp_ajax_wpfkrAjaxGenUsers", "wpfkrAjaxGenUsers");

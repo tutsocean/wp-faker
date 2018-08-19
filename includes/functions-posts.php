@@ -79,20 +79,30 @@ function wpfkr_Generate_Featured_Image( $image_url, $post_id ){
 function wpfkrAjaxGenPosts () {
     $wpfkrIsThumbnail = 'off';
     $post_type = $_POST['wpfkr-posttype'];
+    $remaining_posts = $_POST['remaining_posts'];
     $post_count = $_POST['wpfkr-post_count'];
+
+    if($remaining_posts>=10){
+        $loopLimit = 10;
+    }else{
+        $loopLimit = $remaining_posts;
+    }
+
+
     $wpfkrIsThumbnail = $_POST['wpfkr-thumbnail'];
     $counter = 0;
-    for ($i=0; $i < $post_count ; $i++) { 
+    for ($i=0; $i < $loopLimit ; $i++) { 
         $generationStatus = wpfkrGeneratePosts($post_type,$wpfkrIsThumbnail);
         if($generationStatus == 'success'){
             $counter++;
         }
     }
-    if($counter == $post_count){
-        echo json_encode(array('status' => 'success', 'message' => 'Posts generated successfully.') );
+    if($remaining_posts>=10){
+        $remaining_posts = $remaining_posts - 10;
     }else{
-        echo json_encode(array('status' => 'error', 'message' => 'something went wrong. Please try again.') );
+        $remaining_posts = 0;
     }
+    echo json_encode(array('status' => 'success', 'message' => 'Posts generated successfully.','remaining_posts' => $remaining_posts) );
     die();
 }
 add_action("wp_ajax_wpfkrAjaxGenPosts", "wpfkrAjaxGenPosts");
