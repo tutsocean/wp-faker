@@ -4,6 +4,7 @@
 	$(function() {
 		//var data_val = $('#wpfkrGenPostForm').serialize();
 		$('#wpfkrListPostsTbl').DataTable();
+		$('#wpfkrListProductsTbl').DataTable();
 		var is_sending = false,
 		failure_message = 'Whoops, looks like there was a problem. Please try again later.';
 		$('#wpfkrGenPostForm').submit(function (e) {
@@ -15,6 +16,17 @@
 			var $this = $(this); // Cache this
 			// call ajax here
 			wpfkr_generatePostsLoop($this);
+		});
+
+		$('#wpfkrGenProductForm').submit(function (e) {
+			if (is_sending) {
+				return false; // Don't let someone submit the form while it is in-progress...
+			}
+			e.preventDefault(); // Prevent the default form submit
+			$('.remaining_products').val($('.wpfkr-product_count').val());
+			var $this = $(this); // Cache this
+			// call ajax here
+			wpfkr_generateProductsLoop($this);
 		});
 
 		$('#wpfkrGenUserForm').submit(function (e) {
@@ -58,6 +70,42 @@
 						wpfkr_generatePostsLoop($this);
 					}else if (data.status === 'success' && data.remaining_posts==0){
 						$('.wpfkr-success-msg').html('Posts generated successfully.').fadeIn('fast').delay(1000).fadeOut('slow');
+						$('.remaining_notification').html('');
+						is_sending = false;
+					}else {
+						handleFormError(); // If we don't get the expected response, it's an error...
+						is_sending = false;
+					}
+					
+				}
+			});
+		}
+
+
+		function wpfkr_generateProductsLoop($that){
+			var $this = $that;
+			var url = backend_ajax_object.wpfkr_ajax_url;
+			$.ajax({
+				url: url,
+				type: 'post',
+				dataType: 'JSON', // Set this so we don't need to decode the response...
+				data: $this.serialize(), // One-liner form data prep...
+				beforeSend: function () {
+					is_sending = true;
+					$('.wpfkrGenerateProducts').val('Generating products.');
+					// You could do an animation here...
+				},
+				error: handleFormError,
+				success: function (data) {
+					$('.wpfkrGenerateProducts').val('Generate products.');
+					if (data.status === 'success' && data.remaining_products>0) {
+						$('.remaining_products').val(data.remaining_products);
+						var totalOfProducts = $('.wpfkr-product_count').val();
+						console.log(data.remaining_products+' products are remaining out of '+totalOfProducts);
+						$('.remaining_notification').html(data.remaining_products+' products are remaining out of '+totalOfProducts);
+						wpfkr_generateProductsLoop($this);
+					}else if (data.status === 'success' && data.remaining_products==0){
+						$('.wpfkr-success-msg').html('Products generated successfully.').fadeIn('fast').delay(1000).fadeOut('slow');
 						$('.remaining_notification').html('');
 						is_sending = false;
 					}else {

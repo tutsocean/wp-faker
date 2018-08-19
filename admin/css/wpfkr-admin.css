@@ -13,7 +13,7 @@
 .deleteSpan{
   float: right;
 }
-table#wpfkrListPostsTbl thead tr th {
+table#wpfkrListPostsTbl thead tr th, table#wpfkrListProductsTbl thead tr th {
     text-align: left;
 }
 /*button styles*/

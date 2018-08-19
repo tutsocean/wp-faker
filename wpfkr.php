@@ -16,7 +16,7 @@
  * Plugin Name:       WP faker
  * Plugin URI:        http://tutsocean.com/wp-faker
  * Description:       This plugin is purely made by developers and for developers. Use this plugin to generate dummy/fake users, posts, custom posts and woocommerce products for various purposes. 
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            Deepak anand
  * Author URI:        http://tutsocean.com/about-me
  * License:           GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'WPFKR_PLUGIN_NAME_VERSION', '1.0.0' );
+define( 'WPFKR_PLUGIN_NAME_VERSION', '1.0.1' );
 define( 'WPFKR_PLUGIN_BASE_URL',plugin_basename( __FILE__ )); 
 define( 'WPFKR_PLUGIN_BASE_URI',plugin_dir_path( __FILE__ )); 
 define("WPFKR_PLUGIN_DIR",plugin_basename( __DIR__ ));
@@ -72,6 +72,7 @@ function wpfkrAllLoaded(){
   require_once plugin_dir_path( __FILE__ ) . 'includes/functions.php';
   require_once plugin_dir_path( __FILE__ ) . 'includes/functions-posts.php';
   require_once plugin_dir_path( __FILE__ ) . 'includes/functions-users.php';
+  require_once plugin_dir_path( __FILE__ ) . 'includes/functions-products.php';
 }
 
 // redirect to plugin page after activation
