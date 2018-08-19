@@ -9,7 +9,7 @@ Stable tag: trunk
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
-A wordpress plugin to generate fake/dummy users, posts, custom posts and woocommerce products.
+A wordpress plugin to generate fake/dummy users, posts and custom posts.
 
 == Description ==
 This plugin is made by developer and for developers. Initially, it was my own requirement to test my custom theme functionality which contains testing of different modules like \"load more users\", \"load more posts\", \"filter posts by tags\" etc. At that time, I was looking for some tool through which I can generate dummy data which I can use for my testing purpose and after moving that website to live, I can remove all dummy data. I started developing this plugin for my personal use but now I think this can help many other needy developers.
