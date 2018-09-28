@@ -38,8 +38,8 @@ function wpfkrAjaxGenUsers () {
     $remaining_users = $_POST['remaining_users'];
     $user_count = $_POST['wpfkr-user_count'];
     $wpfkrIsBio = $_POST['wpfkr-bio'];
-    if($remaining_users>=5){
-        $loopLimit = 5;
+    if($remaining_users>=2){
+        $loopLimit = 2;
     }else{
         $loopLimit = $remaining_users;
     }
@@ -50,8 +50,8 @@ function wpfkrAjaxGenUsers () {
             $counter++;
         }
     }
-    if($remaining_users>=5){
-        $remaining_users = $remaining_users - 5;
+    if($remaining_users>=2){
+        $remaining_users = $remaining_users - 2;
     }else{
         $remaining_users = 0;
     }
@@ -60,3 +60,27 @@ function wpfkrAjaxGenUsers () {
 }
 add_action("wp_ajax_wpfkrAjaxGenUsers", "wpfkrAjaxGenUsers");
 add_action("wp_ajax_nopriv_wpfkrAjaxGenUsers", "wpfkrAjaxGenUsers");
+
+function wpfkrGetFakeUsers(){
+    $users = get_users(array(
+        'meta_key'     => 'wpfkr_user',
+        'meta_value'   => 'true',
+        'meta_compare' => '=',
+    ));
+    return $users;
+}
+
+function wpfkrDeleteFakeUsers(){
+    $users = wpfkrGetFakeUsers();
+    foreach ($users as $key => $userDatavalue){
+        wp_delete_user($userDatavalue->ID);
+    }
+}
+
+function wpfkrDeleteUsers () {
+    wpfkrDeleteFakeUsers();
+    echo json_encode(array('status' => 'success', 'message' => 'Data deleted successfully.') );
+    die();
+}
+add_action("wp_ajax_wpfkrDeleteUsers", "wpfkrDeleteUsers");
+add_action("wp_ajax_nopriv_wpfkrDeleteUsers", "wpfkrDeleteUsers");

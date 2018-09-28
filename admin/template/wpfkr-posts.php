@@ -16,8 +16,8 @@
 		}
 		?>
 	    <h2 class="nav-tab-wrapper">
-		    <a href="?page=Posts&tab=generate_posts" class="nav-tab <?php echo $active_tab == 'generate_posts' ? 'nav-tab-active' : ''; ?>">Generate Posts</a>
-		    <a href="?page=Posts&tab=view_posts" class="nav-tab <?php echo $active_tab == 'view_posts' ? 'nav-tab-active' : ''; ?>">View Fake Posts</a>
+		    <a href="?page=wpfkr-posts&tab=generate_posts" class="nav-tab <?php echo $active_tab == 'generate_posts' ? 'nav-tab-active' : ''; ?>">Generate Posts</a>
+		    <a href="?page=wpfkr-posts&tab=view_posts" class="nav-tab <?php echo $active_tab == 'view_posts' ? 'nav-tab-active' : ''; ?>">View Fake Posts</a>
 		</h2>
 	</div>
 	<div class="wpfkr-pagebody">

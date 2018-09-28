@@ -3,7 +3,7 @@ function wpfkrProducts(){
     include( WP_PLUGIN_DIR.'/'.plugin_dir_path(WPFKR_PLUGIN_BASE_URL) . 'admin/template/wpfkr-products.php');
 }
 
-function wpfkrGenerateProducts($posttype='product',$wpfkrIsThumbnail='off'){
+function wpfkrGenerateProducts($posttype='product',$wpfkrIsThumbnail='off',$productHaveSamePrice='off',$productHaveSalesPrice='off'){
     include( WP_PLUGIN_DIR.'/'.plugin_dir_path(WPFKR_PLUGIN_BASE_URL) . 'vendor/autoload.php');
     // use the factory to create a Faker\Generator instance
     $wpfkrFaker = Faker\Factory::create();
@@ -29,11 +29,16 @@ function wpfkrGenerateProducts($posttype='product',$wpfkrIsThumbnail='off'){
 		update_post_meta( $wpfkrPostID, '_visibility', 'visible' );
 
 		// price
-		$price = wc_format_decimal( floatval( rand( 1, 10000 ) ) / 100.0 );
+        if($productHaveSamePrice=='off'){
+            $price = wc_format_decimal( floatval( rand( 1, 10000 ) ) / 100.0 );  
+        }else{
+            $price = 200;
+        }
 		update_post_meta( $wpfkrPostID, '_price', $price );
 		update_post_meta( $wpfkrPostID, '_regular_price', $price );
-		update_post_meta( $wpfkrPostID, '_sale_price', $price-1 );
-
+		if($productHaveSalesPrice=='on'){
+            update_post_meta( $wpfkrPostID, '_sale_price', $price-1 );
+        }
 		// add categories
 		$wpfkrTerms = array();
 		$wpfkr_cats = wpfkrGetWcCategories();
@@ -67,9 +72,12 @@ function wpfkrAjaxGenProducts () {
     $post_type = 'product';
     $remaining_products = $_POST['remaining_products'];
     $product_count = $_POST['wpfkr-product_count'];
+    $productHaveSalePrice = $_POST['wpfkr-haveSalesPrice']?$_POST['wpfkr-haveSalesPrice']:'off';
+    $productHaveSamePrice = $_POST['wpfkr-haveSamePrice']?$_POST['wpfkr-haveSamePrice']:'off';
+  
 
-    if($remaining_products>=10){
-        $loopLimit = 10;
+    if($remaining_products>=2){
+        $loopLimit = 2;
     }else{
         $loopLimit = $remaining_products;
     }
@@ -78,13 +86,13 @@ function wpfkrAjaxGenProducts () {
     $wpfkrIsThumbnail = $_POST['wpfkr-thumbnail'];
     $counter = 0;
     for ($i=0; $i < $loopLimit ; $i++) { 
-        $generationStatus = wpfkrGenerateProducts($post_type,$wpfkrIsThumbnail);
+        $generationStatus = wpfkrGenerateProducts($post_type,$wpfkrIsThumbnail,$productHaveSamePrice,$productHaveSalePrice);
         if($generationStatus == 'success'){
             $counter++;
         }
     }
-    if($remaining_products>=10){
-        $remaining_products = $remaining_products - 10;
+    if($remaining_products>=2){
+        $remaining_products = $remaining_products - 2;
     }else{
         $remaining_products = 0;
     }
@@ -121,3 +129,11 @@ function wpfkrDeleteFakeProducts(){
     }
     wp_reset_postdata();
 }
+
+function wpfkrDeleteProducts () {
+    wpfkrDeleteFakeProducts();
+    echo json_encode(array('status' => 'success', 'message' => 'Data deleted successfully.') );
+    die();
+}
+add_action("wp_ajax_wpfkrDeleteProducts", "wpfkrDeleteProducts");
+add_action("wp_ajax_nopriv_wpfkrDeleteProducts", "wpfkrDeleteProducts");

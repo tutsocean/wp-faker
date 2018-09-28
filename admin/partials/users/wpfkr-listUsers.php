@@ -9,7 +9,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'wpfkr_deleteusers'){
 	foreach ($users as $key => $userDatavalue){
 		wp_delete_user($userDatavalue->ID);
 	}
-	wp_redirect("admin.php?page=Users&tab=view_users&status=success");
+	wp_redirect("admin.php?page=wpfkr-users&tab=view_users&status=success");
 }
 $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
  ?>

@@ -16,8 +16,8 @@
 		}
 		?>
 	    <h2 class="nav-tab-wrapper">
-		    <a href="?page=Users&tab=generate_users" class="nav-tab <?php echo $active_tab == 'generate_users' ? 'nav-tab-active' : ''; ?>">Generate Users</a>
-		    <a href="?page=Users&tab=view_users" class="nav-tab <?php echo $active_tab == 'view_users' ? 'nav-tab-active' : ''; ?>">View Fake Users</a>
+		    <a href="?page=wpfkr-users&tab=generate_users" class="nav-tab <?php echo $active_tab == 'generate_users' ? 'nav-tab-active' : ''; ?>">Generate Users</a>
+		    <a href="?page=wpfkr-users&tab=view_users" class="nav-tab <?php echo $active_tab == 'view_users' ? 'nav-tab-active' : ''; ?>">View Fake Users</a>
 		</h2>
 	</div>
 	<div class="wpfkr-pagebody">

@@ -2,7 +2,7 @@
 global $wpdb;
 if(isset($_GET['action']) && $_GET['action'] == 'wpfkr_deleteposts'){
 	wpfkrDeleteFakePosts();
-	wp_redirect("admin.php?page=Posts&tab=view_posts&status=success");
+	wp_redirect("admin.php?page=wpfkr-posts&tab=view_posts&status=success");
 }
 $wpfkrQueryData = wpfkrGetFakePostsList();
 $wpfkrPostData = $wpfkrQueryData->posts;

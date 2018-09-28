@@ -1,24 +1,49 @@
 <div class="wrap wpfkr-about-wrap about-wrap">
-	<h1>WP Faker 1.0.0</h1>
+	<h1>WP Faker <?=WPFKR_PLUGIN_NAME_VERSION?></h1>
 	<div class="wpfkr-about-text">
 		Thank you for choosing WP Faker! We hope that your experience with our plugin makes creating <b>fake users, fake posts & custom posts, fake woocommerce products</b> quick and easy.
 	</div>
 	<h2>What our plugin provides?</h2>
 	<div class="wpfkr-about-integrations">
 		<div class="wpfkr-feature feature-section col three-col">
-			<div class="col wpfkr-col">
-				<h2>Fake wp users</h2>
-				<p>As the name, "fake users" sounds like something illegal but actually its not. The main purpose of generating fake users is to check the functionality which is related to multiple users.</p>
+			<div class="col wpfkr-col wpfkrPanelWrapper">
+				<div class="wpfkrPanelHeading">Fake wp users</div>
+				<div class="wpfkrPanelBody">
+					<p>As the name, "fake users" sounds like something illegal but actually its not. The main purpose of generating fake users is to check the functionality which is related to multiple users.</p>
+					<p class="wpfkrLinkWrapper">
+						<a href="?page=wpfkr-users">Generate users</a>
+					</p>
+				</div>
 			</div>
-			<div class="col wpfkr-col">
-				<h2>Fake posts</h2>
-				<p>You can generate fake wordpress default posts. This is for testing purpose only.</p>
+			<div class="col wpfkr-col wpfkrPanelWrapper">
+				<div class="wpfkrPanelHeading">Fake posts</div>
+				<div class="wpfkrPanelBody">
+					<p>You can generate fake wordpress default posts. This is for testing purpose only.</p>
+					<p class="wpfkrLinkWrapper">
+						<a href="?page=wpfkr-posts">Generate posts</a>
+					</p>
+				</div>
 			</div>
-			<div class="col wpfkr-col wpfkr-last-feature">
-				<h2>Fake custom posts</h2>
-				<p>You can generate fake wordpress custom posts. This is again for testing purpose only.</p>
+			<div class="col wpfkr-col wpfkrPanelWrapper">
+				<div class="wpfkrPanelHeading">Fake custom posts</div>
+				<div class="wpfkrPanelBody">
+					<p>You can generate fake wordpress custom posts. This is again for testing purpose only.</p>
+					<p class="wpfkrLinkWrapper">
+						<a href="?page=wpfkr-posts">Generate custom posts</a>
+					</p>
+				</div>
+			</div>
+			<div class="col wpfkr-col wpfkrPanelWrapper">
+				<div class="wpfkrPanelHeading">Fake woocommerce products</div>
+				<div class="wpfkrPanelBody">
+					<p>Woocommerce dummy prodcuts are very important for e-commerce theme development. You can generate n number of woocommerce prodcts using this plugin.</p>
+					<p class="wpfkrLinkWrapper">
+						<a href="?page=wpfkr-products">Generate products</a>
+					</p>
+				</div>
 			</div>
 		</div>
+
 	</div>
 
 	<div class="wpfkr-extranotes">

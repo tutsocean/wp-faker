@@ -1,4 +1,7 @@
 <div class="wpfkr-wrapper">
+
+	<?php if ( class_exists( 'WooCommerce' ) ) { ?>
+
 	<div class="wpfkr-top-header">
 	    <h2><?php echo  WPFKR_PLUGIN_NAME ?> <span> - Generate Woocommerce products</span></h2>
 	    <?php 
@@ -16,8 +19,8 @@
 		}
 		?>
 	    <h2 class="nav-tab-wrapper">
-		    <a href="?page=Products&tab=generate_products" class="nav-tab <?php echo $active_tab == 'generate_products' ? 'nav-tab-active' : ''; ?>">Generate Products</a>
-		    <a href="?page=Products&tab=view_products" class="nav-tab <?php echo $active_tab == 'view_products' ? 'nav-tab-active' : ''; ?>">View Fake Products</a>
+		    <a href="?page=wpfkr-products&tab=generate_products" class="nav-tab <?php echo $active_tab == 'generate_products' ? 'nav-tab-active' : ''; ?>">Generate Products</a>
+		    <a href="?page=wpfkr-products&tab=view_products" class="nav-tab <?php echo $active_tab == 'view_products' ? 'nav-tab-active' : ''; ?>">View Fake Products</a>
 		</h2>
 	</div>
 	<div class="wpfkr-pagebody">
@@ -32,5 +35,10 @@
 	</div>
 	<div class="wpfkr-footer">
 		
-	</div>
+	</div> 
+	<?php } else{ ?>
+		<div class="wpfkr-pagebody">
+			<div class="wpfkr-error-msg">This section requires woocommerce plugin to be installed and active. Please activate woocommerce plugin first.</div>
+		</div>
+	<?php } ?>
 </div>
