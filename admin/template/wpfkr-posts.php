@@ -1,6 +1,6 @@
 <div class="wpfkr-wrapper">
 	<div class="wpfkr-top-header">
-	    <h2><?php echo  PLUGIN_NAME ?> <span> - Generate Posts</span></h2>
+	    <h2><?php echo  WPFKR_PLUGIN_NAME ?> <span> - Generate Posts</span></h2>
 	    <?php 
 	    if(isset($_GET['status'])){
 	    	if($_GET['status'] == 'success'){
@@ -16,8 +16,8 @@
 		}
 		?>
 	    <h2 class="nav-tab-wrapper">
-		    <a href="?page=Posts&tab=generate_posts" class="nav-tab <?php echo $active_tab == 'generate_posts' ? 'nav-tab-active' : ''; ?>">Generate Posts</a>
-		    <a href="?page=Posts&tab=view_posts" class="nav-tab <?php echo $active_tab == 'view_posts' ? 'nav-tab-active' : ''; ?>">View Fake Posts</a>
+		    <a href="?page=wpfkr-posts&tab=generate_posts" class="nav-tab <?php echo $active_tab == 'generate_posts' ? 'nav-tab-active' : ''; ?>">Generate Posts</a>
+		    <a href="?page=wpfkr-posts&tab=view_posts" class="nav-tab <?php echo $active_tab == 'view_posts' ? 'nav-tab-active' : ''; ?>">View Fake Posts</a>
 		</h2>
 	</div>
 	<div class="wpfkr-pagebody">
@@ -27,7 +27,7 @@
 		}else{
 			$page_slug = 'wpfkr-listPosts';
 		}
-		include(WP_PLUGIN_DIR.'/'.plugin_dir_path(PLUGIN_BASE_URL) . 'admin/partials/posts/'.$page_slug.'.php');
+		include(WP_PLUGIN_DIR.'/'.plugin_dir_path(WPFKR_PLUGIN_BASE_URL) . 'admin/partials/posts/'.$page_slug.'.php');
 		?>
 	</div>
 	<div class="wpfkr-footer">

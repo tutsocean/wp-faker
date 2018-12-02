@@ -1,6 +1,6 @@
 <?php
 function wpfkrPosts(){
-    include( WP_PLUGIN_DIR.'/'.plugin_dir_path(PLUGIN_BASE_URL) . 'admin/template/wpfkr-posts.php');
+    include( WP_PLUGIN_DIR.'/'.plugin_dir_path(WPFKR_PLUGIN_BASE_URL) . 'admin/template/wpfkr-posts.php');
 }
 function wpfkrGetPostTypes(){
     $args=array(
@@ -23,13 +23,13 @@ function wpfkrGetPostTypes(){
 }
 
 function wpfkrGeneratePosts($posttype='post',$wpfkrIsThumbnail='off'){
-    include( WP_PLUGIN_DIR.'/'.plugin_dir_path(PLUGIN_BASE_URL) . 'vendor/autoload.php');
+    include( WP_PLUGIN_DIR.'/'.plugin_dir_path(WPFKR_PLUGIN_BASE_URL) . 'vendor/autoload.php');
     // use the factory to create a Faker\Generator instance
     $wpfkrFaker = Faker\Factory::create();
     $wpfkrPostTitle = $wpfkrFaker->text($maxNbChars = 40);
     $wpfkrPostDescription = $wpfkrFaker->text($maxNbChars = 700);
-    $rand_num = rand(1,10);
-    $wpfkrPostThumb = WP_PLUGIN_DIR.'/'.plugin_dir_path(PLUGIN_BASE_URL) . 'images/posts/'.$rand_num.".jpg";
+    $rand_num = rand(1,15);
+    $wpfkrPostThumb = WP_PLUGIN_DIR.'/'.plugin_dir_path(WPFKR_PLUGIN_BASE_URL) . 'images/posts/'.$rand_num.".jpg";
     // create post
     $wpfkrPostArray = array(
       'post_title'    => wp_strip_all_tags( $wpfkrPostTitle ),
@@ -43,14 +43,14 @@ function wpfkrGeneratePosts($posttype='post',$wpfkrIsThumbnail='off'){
     if($wpfkrPostID){
         update_post_meta($wpfkrPostID,'wpfkr_post','true');
         if($wpfkrIsThumbnail=='on')
-        Generate_Featured_Image( $wpfkrPostThumb,$wpfkrPostID);
+        wpfkr_Generate_Featured_Image( $wpfkrPostThumb,$wpfkrPostID);
         return 'success';
     }else{
         return 'error';
     }
 
 }
-function Generate_Featured_Image( $image_url, $post_id ){
+function wpfkr_Generate_Featured_Image( $image_url, $post_id ){
     $upload_dir = wp_upload_dir();
     $image_data = file_get_contents($image_url);
     $filename = "wpfkr_".$post_id;
@@ -72,6 +72,7 @@ function Generate_Featured_Image( $image_url, $post_id ){
     require_once(ABSPATH . 'wp-admin/includes/image.php');
     $attach_data = wp_generate_attachment_metadata( $attach_id, $file );
     $res1= wp_update_attachment_metadata( $attach_id, $attach_data );
+    update_post_meta($attach_id, 'wpfkr_attachment','true');
     $res2= set_post_thumbnail( $post_id, $attach_id );
 }
 
@@ -79,20 +80,30 @@ function Generate_Featured_Image( $image_url, $post_id ){
 function wpfkrAjaxGenPosts () {
     $wpfkrIsThumbnail = 'off';
     $post_type = $_POST['wpfkr-posttype'];
+    $remaining_posts = $_POST['remaining_posts'];
     $post_count = $_POST['wpfkr-post_count'];
+
+    if($remaining_posts>=2){
+        $loopLimit = 2;
+    }else{
+        $loopLimit = $remaining_posts;
+    }
+
+
     $wpfkrIsThumbnail = $_POST['wpfkr-thumbnail'];
     $counter = 0;
-    for ($i=0; $i < $post_count ; $i++) { 
+    for ($i=0; $i < $loopLimit ; $i++) { 
         $generationStatus = wpfkrGeneratePosts($post_type,$wpfkrIsThumbnail);
         if($generationStatus == 'success'){
             $counter++;
         }
     }
-    if($counter == $post_count){
-        echo json_encode(array('status' => 'success', 'message' => 'Posts generated successfully.') );
+    if($remaining_posts>=2){
+        $remaining_posts = $remaining_posts - 2;
     }else{
-        echo json_encode(array('status' => 'error', 'message' => 'something went wrong. Please try again.') );
+        $remaining_posts = 0;
     }
+    echo json_encode(array('status' => 'success', 'message' => 'Posts generated successfully.','remaining_posts' => $remaining_posts) );
     die();
 }
 add_action("wp_ajax_wpfkrAjaxGenPosts", "wpfkrAjaxGenPosts");
@@ -130,3 +141,11 @@ function wpfkrDeleteFakePosts(){
     }
     wp_reset_postdata();
 }
+
+function wpfkrDeletePosts () {
+    wpfkrDeleteFakePosts();
+    echo json_encode(array('status' => 'success', 'message' => 'Data deleted successfully.') );
+    die();
+}
+add_action("wp_ajax_wpfkrDeletePosts", "wpfkrDeletePosts");
+add_action("wp_ajax_nopriv_wpfkrDeletePosts", "wpfkrDeletePosts");

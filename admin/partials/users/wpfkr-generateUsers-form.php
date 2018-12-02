@@ -1,7 +1,8 @@
 <div class="wpfkr-success-msg" style="display: none;"></div>
 <div class="wpfkr-error-msg" style="display: none;"></div>
-<form method="post" id="wpfkrGenUserForm">
+<form method="post" id="wpfkrGenUserForm" class="wpfkrCol-9">
     <input type="hidden" name="action" value="wpfkrAjaxGenUsers" />
+    <input type="hidden" name="remaining_users" class="remaining_users" value="" />
     <table class="form-table">
         <tr valign="top">
             <th scope="row">Choose User Role</th>
@@ -14,7 +15,7 @@
         <tr valign="top">
             <th scope="row">Number of Users</th>
             <td>
-                <input type="number" name="wpfkr-user_count" placeholder="Number of Users" value="10" max="200" min="1" />
+                <input type="number" name="wpfkr-user_count" class="wpfkr-user_count" placeholder="Number of Users" value="10" max="200" min="1" />
             </td>
         </tr>
         <tr valign="top">
@@ -26,6 +27,12 @@
     </table>
     <input class="wpfkr-btn btnFade wpfkr-btnBlueGreen wpfkrGenerateUsers" type="submit" name="wpfkrGenerateUsers" value="Generate Users">
 </form>
-<div class="wpfkr-info-msg">
-    <strong>Please note: </strong>Input maximum of 200 in "Number of users" per generation for quicker result.
+<div class="wrapper dcsLoader wpfkrCol-3" style="display: none;">
+    <div class="wpfkrLoaderWrpper c100 p0 blue">
+        <span class="wpfkrLoaderPer">0%</span>
+        <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+        </div>
+    </div>
 </div>

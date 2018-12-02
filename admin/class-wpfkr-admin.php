@@ -73,8 +73,8 @@ class Wpfkr_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wpfkr-admin.css', array(), $this->version, 'all' );
-		wp_enqueue_style( 'dtable_'.$this->plugin_name, 'https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css', $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wpfkr-admin-min.css', array(), $this->version, 'all' );
+		wp_enqueue_style( 'dtable_'.$this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/jquery.dataTables.css', $this->version, 'all' );
 
 	}
 
@@ -97,9 +97,9 @@ class Wpfkr_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( 'dtable_'.$this->plugin_name, 'https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'dtable_'.$this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/jquery.dataTables.js', array( 'jquery' ), $this->version, false );
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wpfkr-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wpfkr-admin-min.js', array( 'jquery' ), $this->version, false );
 		wp_localize_script($this->plugin_name, 'backend_ajax_object',
         array( 
             'wpfkr_ajax_url' => admin_url( 'admin-ajax.php' ),
