@@ -1,4 +1,4 @@
-#wp-faker
+# wp-faker
 
 This **wordpress plugin** can generate fake/dummy users, posts, custom posts and dummy woocommerce products. 
 
@@ -7,7 +7,7 @@ This **wordpress plugin** can generate fake/dummy users, posts, custom posts and
 > for my own purpose by after that i think there may be some other
 > developers as well who need this kind of plugin.
 
-##Installation
+## Installation
 
 Just clone or download the wp-faker repository/plugin and copy that into the plugins folder of your wordpress install. To clone the repository, use the following command:
 ```
