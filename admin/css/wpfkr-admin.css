@@ -1030,3 +1030,14 @@ a.wpfkr-btn.wpfkr-btnRed:hover {
   }
 }
 /*loaderajax*/
+
+
+.wpfkr-feature.feature-section.col.three-col {
+    -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2;
+}
+
+.col.wpfkr-col.wpfkrPanelWrapper {
+    margin-bottom: 1.3em;
+}
