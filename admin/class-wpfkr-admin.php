@@ -100,7 +100,7 @@ class Wpfkr_Admin {
 		wp_enqueue_script( 'dtable_'.$this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/jquery.dataTables.js', array( 'jquery' ), $this->version, false );
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wpfkr-admin-min.js', array( 'jquery' ), $this->version, false );
-		wp_localize_script($this->plugin_name, 'backend_ajax_object',
+		wp_localize_script($this->plugin_name, 'wpfkr_backend_ajax_object',
         array( 
             'wpfkr_ajax_url' => admin_url( 'admin-ajax.php' ),
         )

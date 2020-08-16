@@ -30,7 +30,7 @@
 		});
 
 		function wpfkrAjaxManageData(wpfkrAction){
-			var url = backend_ajax_object.wpfkr_ajax_url;
+			var url = wpfkr_backend_ajax_object.wpfkr_ajax_url;
 			$.ajax({
 				url: url,
 				type: 'post',
@@ -88,7 +88,7 @@
 		});
 
 		$('#wpfkrGenUserForm').submit(function (e) {
-			var url = backend_ajax_object.wpfkr_ajax_url;
+			var url = wpfkr_backend_ajax_object.wpfkr_ajax_url;
 			if (is_sending) {
 				return false; // Don't let someone submit the form while it is in-progress...
 			}
@@ -108,7 +108,7 @@
 
 		function wpfkr_generatePostsLoop($that){
 			var $this = $that;
-			var url = backend_ajax_object.wpfkr_ajax_url;
+			var url = wpfkr_backend_ajax_object.wpfkr_ajax_url;
 			$.ajax({
 				url: url,
 				type: 'post',
@@ -160,7 +160,7 @@
 
 		function wpfkr_generateProductsLoop($that){
 			var $this = $that;
-			var url = backend_ajax_object.wpfkr_ajax_url;
+			var url = wpfkr_backend_ajax_object.wpfkr_ajax_url;
 			$.ajax({
 				url: url,
 				type: 'post',
@@ -214,7 +214,7 @@
 
 		function wpfkr_generateUsersLoop($that){
 			var $this = $that;
-			var url = backend_ajax_object.wpfkr_ajax_url;
+			var url = wpfkr_backend_ajax_object.wpfkr_ajax_url;
 			$.ajax({
 				url: url,
 				type: 'post',
