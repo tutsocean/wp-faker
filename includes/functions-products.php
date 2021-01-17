@@ -76,8 +76,8 @@ function wpfkrAjaxGenProducts () {
     $productHaveSamePrice = $_POST['wpfkr-haveSamePrice']?$_POST['wpfkr-haveSamePrice']:'off';
   
 
-    if($remaining_products>=2){
-        $loopLimit = 2;
+    if($remaining_products>=5){
+        $loopLimit = 5;
     }else{
         $loopLimit = $remaining_products;
     }
@@ -91,8 +91,8 @@ function wpfkrAjaxGenProducts () {
             $counter++;
         }
     }
-    if($remaining_products>=2){
-        $remaining_products = $remaining_products - 2;
+    if($remaining_products>=5){
+        $remaining_products = $remaining_products - 5;
     }else{
         $remaining_products = 0;
     }

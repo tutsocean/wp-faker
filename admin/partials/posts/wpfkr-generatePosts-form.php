@@ -21,6 +21,17 @@
 	        	<input type="number" name="wpfkr-post_count" class="wpfkr-post_count"  placeholder="Number of posts" value="10" max="500" min="1" />
 	        </td>
         </tr>
+
+        <tr valign="top">
+	        <th scope="row">Posts date range</th>
+	        <td>
+	        	<label>From</label>
+	        	<input type="date" name="wpfkr-post_from" class="wpfkr-post_from"  placeholder="Date Range From" value="<?=date("Y/m/d")?>"/>
+
+	        	<label>To</label>
+	        	<input type="date" name="wpfkr-post_to" class="wpfkr-post_to"  placeholder="Date Range To" value="<?=date("Y/m/d")?>" />
+	        </td>
+        </tr>
         <tr valign="top">
 	        <th scope="row">Generate Thumbnail</th>
 	        <td>

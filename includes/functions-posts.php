@@ -22,7 +22,20 @@ function wpfkrGetPostTypes(){
     return $posttypes_array;
 }
 
-function wpfkrGeneratePosts($posttype='post',$wpfkrIsThumbnail='off'){
+function wpfkrGeneratePosts(
+    $posttype='post',
+    $wpfkrIsThumbnail='off',
+    $postDateFrom='',
+    $postDateTo=''
+){
+
+    if($postDateFrom == ''){
+        $postDateFrom = date("Y-m-d");
+    }
+
+    if($postDateTo == ''){
+        $postDateTo = date("Y-m-d");
+    }
     include( WP_PLUGIN_DIR.'/'.plugin_dir_path(WPFKR_PLUGIN_BASE_URL) . 'vendor/autoload.php');
     // use the factory to create a Faker\Generator instance
     $wpfkrFaker = Faker\Factory::create();
@@ -31,11 +44,15 @@ function wpfkrGeneratePosts($posttype='post',$wpfkrIsThumbnail='off'){
     $rand_num = rand(1,15);
     $wpfkrPostThumb = WP_PLUGIN_DIR.'/'.plugin_dir_path(WPFKR_PLUGIN_BASE_URL) . 'images/posts/'.$rand_num.".jpg";
     // create post
+
+    $postDate = wpfkrRandomDate($postDateFrom,$postDateTo);
+
     $wpfkrPostArray = array(
       'post_title'    => wp_strip_all_tags( $wpfkrPostTitle ),
       'post_content'  => $wpfkrPostDescription,
       'post_status'   => 'publish',
       'post_author'   => 1,
+      'post_date'   => $postDate,
       'post_type' => $posttype
     );
     // Insert the post into the database
@@ -91,9 +108,12 @@ function wpfkrAjaxGenPosts () {
 
 
     $wpfkrIsThumbnail = $_POST['wpfkr-thumbnail'];
+
+    $postFromDate = $_POST['wpfkr-post_from'];
+    $postToDate = $_POST['wpfkr-post_to'];
     $counter = 0;
     for ($i=0; $i < $loopLimit ; $i++) { 
-        $generationStatus = wpfkrGeneratePosts($post_type,$wpfkrIsThumbnail);
+        $generationStatus = wpfkrGeneratePosts($post_type,$wpfkrIsThumbnail,$postFromDate,$postToDate);
         if($generationStatus == 'success'){
             $counter++;
         }

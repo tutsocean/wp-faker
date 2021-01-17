@@ -68,3 +68,11 @@ function wpfkr_add_toolbar_items($admin_bar){
         ),
     ));
 }
+
+function wpfkrRandomDate($sStartDate, $sEndDate, $sFormat = 'Y-m-d H:i:s')
+{
+    $fMin = strtotime($sStartDate);
+    $fMax = strtotime($sEndDate);
+    $fVal = mt_rand($fMin, $fMax);
+    return date($sFormat, $fVal);
+}
